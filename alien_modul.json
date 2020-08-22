@@ -1,0 +1,17 @@
+{
+  "Iklan": [
+      {
+      "status": "0",
+      "link": "https://play.google.com/store/apps/details?id=",
+      "interid": "",
+      "bannerid": "",
+      "startappid": "",
+      "pengaturan_iklan": "2",
+      "fan_inter": "YOUR_PLACEMENT_ID",
+      "fan_banner": "YOUR_PLACEMENT_ID",
+      "fan_banner_big": "YOUR_PLACEMENT_ID"
+      }
+
+   ]
+
+}

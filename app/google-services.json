@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "291279751968",
+    "firebase_url": "https://contoh-aplikasi-9e919.firebaseio.com",
+    "project_id": "contoh-aplikasi-9e919",
+    "storage_bucket": "contoh-aplikasi-9e919.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291279751968:android:260f93a9d95555488d2545",
+        "android_client_info": {
+          "package_name": "com.aliendroid.latihanjson"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291279751968-sg7u2lft69vrh4ff0t2dovilmetnfeuc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFB9NcuaNBViBkli5pSb5NNR7PLSt4Xxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291279751968-sg7u2lft69vrh4ff0t2dovilmetnfeuc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-1296876880576369~2696510679"
+    }
+  ],
+  "configuration_version": "1"
+}

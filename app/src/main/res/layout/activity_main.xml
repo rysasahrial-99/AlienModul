@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@android:color/background_light"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="250dp"
+        android:layout_height="98dp"
+        android:src="@drawable/spa" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/wall_stuff_button1"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="About"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alien modul adalah free source code untuk menambahkan modul gdpr, firebase, switch iklan dan redirect app. Disertakan juga file json untuk metode remots ads. \nUntuk penggunaan modul ini silahkan buka Chanel Reskin Aliendroid jika belum paham tentang coding." />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Website: https://aliendroid.dev"
+            android:textColor="@color/colorPrimaryDark" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Pengaturan Iklan"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/rdiklan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rdAdmob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admob" />
+
+        <RadioButton
+            android:id="@+id/rdfan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FAN" />
+
+        <RadioButton
+            android:id="@+id/rdstart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="StartApp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btninter"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/wall_stuff_button1"
+        android:text="Intertitial" />
+
+    <Button
+        android:id="@+id/btbanner"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/wall_stuff_button1"
+        android:text="Banner" />
+
+    <Button
+        android:id="@+id/btnative"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/wall_stuff_button1"
+        android:text="Native" />
+
+    <Button
+        android:id="@+id/btreward"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/wall_stuff_button1"
+        android:text="Reward" />
+
+</LinearLayout>

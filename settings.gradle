@@ -1,0 +1,3 @@
+include ':nativeadmob'
+include ':app'
+rootProject.name = "Latihan Json"
