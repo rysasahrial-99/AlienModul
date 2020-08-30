@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BannerActivity"></activity>
+        <activity android:name=".UpActivity"></activity>
+        <activity android:name=".BannerActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

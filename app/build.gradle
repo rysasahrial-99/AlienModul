@@ -5,11 +5,11 @@ android {
     buildToolsVersion "30.0.0"
 
     defaultConfig {
-        applicationId "com.aliendroid.latihanjson"
-        minSdkVersion 21
+        applicationId "com.fakechat.fakevideovoice"
+        minSdkVersion 24
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 7
+        versionName "1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -20,19 +20,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.android.material:material:1.2.0'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     /*
     Facebook Audience Network
      */
-    implementation "com.facebook.android:audience-network-sdk:5.10.1"
+    implementation "com.facebook.android:audience-network-sdk:5.11.0"
     /*
     StartApp
      */
@@ -57,5 +65,9 @@ dependencies {
     Native Admob
      */
     implementation project(':nativeadmob')
+
+    implementation 'com.google.android.play:core:1.8.0'
+
+
 }
 apply plugin: 'com.google.gms.google-services'

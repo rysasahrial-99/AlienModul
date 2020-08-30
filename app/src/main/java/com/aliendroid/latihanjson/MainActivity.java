@@ -5,16 +5,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.util.Printer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
@@ -30,6 +34,15 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.InstallState;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.InstallStatus;
+import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.ump.ConsentDebugSettings;
 import com.google.android.ump.ConsentForm;
 import com.google.android.ump.ConsentInformation;
@@ -49,9 +62,10 @@ import static com.aliendroid.latihanjson.Config.STRATAPPID;
 import static com.google.android.gms.ads.RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_TRUE;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int MY_REQUEST_CODE = 999 ;
     /*
-    Intertitial Ads
-     */
+        Intertitial Ads
+         */
     private InterstitialAd mInterstitialAd;
     public static com.facebook.ads.InterstitialAd interstitialAdfb;
 
@@ -67,10 +81,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyFirebaseMsgService";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        cekversi();
 
         /*
         Konfigurasi Redirect App
@@ -253,6 +269,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button muncuupdate = findViewById(R.id.btnative);
+        muncuupdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               cekversi();
+            }
+        });
+
 
           /*
         Tombol memunculkan banner
@@ -266,16 +290,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-           /*
-        Tombol memunculkan banner
-         */
-        Button btnative = findViewById(R.id.btnative);
-        btnative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               exitapp();
-            }
-        });
 
         Button btreward= findViewById(R.id.btreward);
         btreward.setOnClickListener(new View.OnClickListener() {
@@ -362,6 +376,78 @@ public class MainActivity extends AppCompatActivity {
         });
         AlertDialog alert=builder.create();
         alert.show();
+    }
+
+    AppUpdateManager appUpdateManager;
+    com.google.android.play.core.tasks.Task<AppUpdateInfo> appUpdateInfoTask;
+    InstallStateUpdatedListener listener;
+    private void cekversi(){
+        // Creates instance of the manager.
+        appUpdateManager = AppUpdateManagerFactory.create(MainActivity.this);
+
+        // Returns an intent object that you use to check for an update.
+        appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    // For a flexible update, use AppUpdateType.FLEXIBLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                try {
+
+                    // Create a listener to track request state updates.
+                    listener = state -> {
+                        if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                            // After the update is downloaded, show a notification
+                            // and request user confirmation to restart the app.
+                            popupSnackbarForCompleteUpdate();
+                        }
+
+                        if (state.installStatus() == InstallStatus.INSTALLED){
+                            appUpdateManager.unregisterListener(listener);
+                        }
+                    };
+
+                    appUpdateManager.registerListener(listener);
+                    appUpdateManager.startUpdateFlowForResult(
+                            appUpdateInfo, AppUpdateType.IMMEDIATE,
+                            this,
+                            MY_REQUEST_CODE);
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) {
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /* Displays the snackbar notification and call to action. */
+    private void popupSnackbarForCompleteUpdate() {
+        Snackbar snackbar =
+                Snackbar.make(
+                        findViewById(R.id.layar),
+                        "An update has just been downloaded.",
+                        Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction("RESTART", view -> appUpdateManager.completeUpdate());
+        snackbar.setActionTextColor(
+                getResources().getColor(R.color.gnt_black));
+        snackbar.show();
+    }
+
+    protected void onDestroy(){
+        super.onDestroy();
+        appUpdateManager.unregisterListener(listener);
     }
 
 }
